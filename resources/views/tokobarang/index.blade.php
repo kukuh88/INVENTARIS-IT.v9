@@ -79,12 +79,13 @@
                                                         </td>
                                                         <td>
                                                             <a href="/tokobarang/{{ $s->id }}/edit"
-                                                                class="btn btn-outline-warning bi bi-pencil-square"></a>
+                                                                class="btn btn-warning"><i
+                                                                    class="bi bi-pencil-square"></i></a>
 
-                                                            <a href="/tokobarang/{{ $s->id }}/destroy"
-                                                                class="btn btn-outline-danger btn-action delete bi bi-trash"
-                                                                data-url="{{ $s->nama_toko }}"
-                                                                data-text="{{ $s->nama_toko }}"></a>
+                                                            <a href="#" class="btn btn-danger delete"
+                                                                book-id="{{ $s->id }}"
+                                                                book_name="{{ $s->nama_toko }}"><i
+                                                                    class="bi bi-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -173,11 +174,11 @@
             $('#datatable').DataTable();
             $('body').on('click', '.delete', function() {
                 var book_id = $(this).attr('book-id');
-                var tokobarang = $(this).attr('tokobarang');
+                var book_name = $(this).attr('book_name');
 
                 swal({
                         title: "Are you sure?",
-                        text: "The " + tokobarang + " wants to delete??",
+                        text: "The " + book_name + " wants to delete??",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -188,7 +189,7 @@
                             //swal("Data siswa dengan id "+ siswa_id +" telah berhasil dihapus!", {
                             //icon: "success",
                             //});
-                            window.location = "/tokobarang" + "/destroy/" + book_id;
+                            window.location = "/tokobarang/" + book_id + "/destroy";
 
                         } else {
                             swal("Data is not deleted");

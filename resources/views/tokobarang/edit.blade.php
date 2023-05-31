@@ -43,7 +43,6 @@
 
                             <form action="/tokobarang/{{ $tokobarang->id }}/update" method="POST">
                                 {{ csrf_field() }}
-                                @method('PUT')
 
                                 <div class="row mb-3">
                                     <label for="text" class="col-sm-2 col-form-label">Nama Toko</label>

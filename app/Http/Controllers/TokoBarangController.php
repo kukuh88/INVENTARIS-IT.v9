@@ -64,8 +64,9 @@ class TokoBarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tokobarang $tokobarang)
+    public function edit($id)
     {
+        $tokobarang = Tokobarang::find($id);
         return view('tokobarang.edit', compact('tokobarang'));
     }
 
@@ -78,7 +79,10 @@ class TokoBarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $tokobarang = TokoBarang::find($id);
+        $tokobarang->update($request->all());
+        toastr()->success('Data has been updated successfully!!');
+        return redirect('/tokobarang')->with('susccess', 'Data has been updated successfully!!');
     }
 
     /**
@@ -87,15 +91,10 @@ class TokoBarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tokobarang $tokobarang)
+    public function destroy($id)
     {
+        $tokobarang = TokoBarang::find($id);
         $tokobarang->delete();
-        if(request()->ajax()){
-            return response()->json([
-                'code' => 0,
-                'message' => ('message berhasil')
-            ]);
-        }
         return redirect('/tokobarang')->with('success','Data has been deleted successfully!');
     }
 }
