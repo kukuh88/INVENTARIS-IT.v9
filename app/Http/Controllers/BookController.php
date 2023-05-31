@@ -10,9 +10,9 @@ class BookController extends Controller
 {
     public function index(){
         $book = Book::all();
-        return view('book.index',compact(['book']), [
-            'tokobarang' => TokoBarang::get(),
-        ]);
+        $tokobarang = Tokobarang::all();
+        // dd($tokobarang);
+        return view('book.index',compact(['book','tokobarang']));
     }
 
     public function create(Request $request)
@@ -62,7 +62,6 @@ class BookController extends Controller
             $tahun,
             $auto_number
         );
-
         Book::create($attributes);
 
         return redirect('/book')->with('success','Data has been saved successfully!');

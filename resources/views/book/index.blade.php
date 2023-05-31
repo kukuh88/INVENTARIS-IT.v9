@@ -380,8 +380,9 @@
                                     <select name="lokasi" class="form-select" id="floatingSelect"
                                         aria-label="Floating label select example">
                                         @foreach ($tokobarang as $b)
-                                            <option value="{{ $b->tokobarang }}">{{ $b->tokobarang }}</option>
+                                            <option value="{{ $b->id }}">{{ $b->alamat_toko }}</option>
                                         @endforeach
+
                                     </select>
                                     @if ($errors->has('lokasi'))
                                         <span class="help-block"
