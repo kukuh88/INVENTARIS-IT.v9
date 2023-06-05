@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\JenisBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TokoBarangController;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,5 +55,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/tokobarang/{id}/edit', [TokoBarangController::class, 'edit']);
     Route::post('/tokobarang/{id}/update', [TokoBarangController::class, 'update']);
     Route::get('/tokobarang/{id}/destroy', [TokoBarangController::class,'destroy']);
-    
+
+    // JENIS BARANG
+    Route::get('/jenisbarang', [JenisBarangController::class, 'index']);
+    Route::post('/jenisbarang/store', [JenisBarangController::class, 'store']);
+    Route::get('/jenisbarang/{id}/edit', [JenisBarangController::class, 'edit']);
+    Route::post('/jenisbarang/{id}/update', [JenisBarangController::class, 'update']);
+    Route::get('/jenisbarang/{id}/destroy', [JenisBarangController::class, 'destroy']);
+
+    // QRCODE
+    // Route::get('qr-code-g', function () {
+    //     \QrCode::size(500)
+    //             ->format('png')
+    //             ->generate('www.google.com', public_path('images/qrcode.png'));
+    // return view('qrCode');
+    // });
+
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\TokoBarang;
+use App\Models\JenisBarang;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -11,8 +12,9 @@ class BookController extends Controller
     public function index(){
         $book = Book::all();
         $tokobarang = Tokobarang::all();
+        $jenisbarang = JenisBarang::all();
         // dd($tokobarang);
-        return view('book.index',compact(['book','tokobarang']));
+        return view('book.index',compact(['book','tokobarang','jenisbarang']));
     }
 
     public function create(Request $request)

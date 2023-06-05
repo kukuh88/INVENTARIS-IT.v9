@@ -40,7 +40,7 @@
                     <a href="/tokobarang">
                         <i class="bi bi-circle"></i><span>Lokasi Toko Barang</span>
                     </a>
-                    <a href="#">
+                    <a href="/jenisbarang">
                         <i class="bi bi-circle"></i><span>Jenis Barang</span>
                     </a>
                     <a href="#">

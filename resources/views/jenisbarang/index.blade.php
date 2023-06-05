@@ -2,11 +2,11 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>LOKASI TOKO BARANG</h1>
+            <h1>JENIS BARANG</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">TOKO BARANG</li>
+                    <li class="breadcrumb-item active">JENIS BARANG</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -20,7 +20,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6">
-                                    <h5 class="card-title">All Toko Barang</h5>
+                                    <h5 class="card-title">All Jenis Barang</h5>
                                 </div>
                                 <div class="col-6">
                                     <div class="right float-end">
@@ -45,14 +45,10 @@
                                                     </th>
                                                     <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        NAMA TOKO</th>
+                                                        ID KATEGORI</th>
                                                     <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        ALAMAT TOKO</th>
-                                                    <th
-                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                        NOMOR TELPON TOKO</th>
-
+                                                        NAMA KATEGORI</th>
                                                     <th
                                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                         ACTION</th>
@@ -62,29 +58,28 @@
                                                 $no = 1;
                                             @endphp
                                             <tbody>
-                                                @foreach ($tokobarang as $s)
+                                                @foreach ($jenisbarang as $s)
                                                     <tr>
                                                         <td class="ps-4">
                                                             <p class="text-xs font-weight-bold mb-0">{{ $no++ }}</p>
                                                         </td>
                                                         <td>
-                                                            <p class="text-xs font-weight-bold mb-0">{{ $s->nama_toko }}</p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="text-xs font-weight-bold mb-0">{{ $s->alamat_toko }}
+                                                            <p class="text-xs font-weight-bold mb-0">
+                                                                {{ $s->kategori_barang }}
                                                             </p>
                                                         </td>
                                                         <td>
-                                                            <p class="text-xs font-weight-bold mb-0">{{ $s->nomor_hp }}</p>
+                                                            <p class="text-xs font-weight-bold mb-0">{{ $s->nama_kategori }}
+                                                            </p>
                                                         </td>
                                                         <td>
-                                                            <a href="/tokobarang/{{ $s->id }}/edit"
+                                                            <a href="/jenisbarang/{{ $s->id }}/edit"
                                                                 class="btn btn-warning"><i
                                                                     class="bi bi-pencil-square"></i></a>
 
                                                             <a href="#" class="btn btn-danger delete"
                                                                 book-id="{{ $s->id }}"
-                                                                book_name="{{ $s->nama_toko }}"><i
+                                                                book_name="{{ $s->nama_kategori }}"><i
                                                                     class="bi bi-trash"></i></a>
                                                         </td>
                                                     </tr>
@@ -103,61 +98,49 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Lokasi Barang</h5>
+                    <h5 class="modal-title">Add Jenis Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
                         <!-- General Form Elements -->
-                        <form action="/tokobarang/store" method="POST" enctype="multipart/form-data">
+                        <form action="/jenisbarang/store" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             {{-- Alamat Toko --}}
-                            <div class="row mb-3{{ $errors->has('alamat_toko') ? ' has-error' : '' }}">
-                                <label for="alamat_toko" class="col-sm-2 col-form-label">Alamat Toko</label>
+                            <div class="row mb-3{{ $errors->has('id_kategori') ? ' has-error' : '' }}">
+                                <label for="id_kategori" class="col-sm-2 col-form-label">Kategori Barang</label>
                                 <div class="col-sm-10">
-                                    <input name="alamat_toko" type="text" id="alamat_toko" class="form-control"
-                                        value="{{ old('alamat_toko') }}" required>
-                                    @if ($errors->has('alamat_toko'))
+                                    <input name="kategori_barang" type="text" id="kategori_barang" class="form-control"
+                                        value="{{ old('kategori_barang') }}" required>
+                                    @if ($errors->has('kategori_barang'))
                                         <span class="help-block"
-                                            style="color: red;">{{ $errors->first('alamat_toko') }}</span>
+                                            style="color: red;">{{ $errors->first('kategori_barang') }}</span>
                                     @endif
                                 </div>
                             </div>
 
 
                             {{-- Nama Toko --}}
-                            <div class="row mb-3{{ $errors->has('nama_toko') ? ' has-error' : '' }}">
-                                <label for="nama_toko" class="col-sm-2 col-form-label">Nama Toko</label>
+                            <div class="row mb-3{{ $errors->has('nama_kategori') ? ' has-error' : '' }}">
+                                <label for="nama_kategori" class="col-sm-2 col-form-label">Nama Kategori</label>
                                 <div class="col-sm-10">
-                                    <input name="nama_toko" type="text" id="nama_toko" class="form-control"
-                                        value="{{ old('nama_toko') }}" required>
-                                    @if ($errors->has('nama_toko'))
+                                    <input name="nama_kategori" type="text" id="nama_kategori" class="form-control"
+                                        value="{{ old('nama_kategori') }}" required>
+                                    @if ($errors->has('nama_kategori'))
                                         <span class="help-block"
-                                            style="color: red;">{{ $errors->first('nama_toko') }}</span>
+                                            style="color: red;">{{ $errors->first('nama_kategori') }}</span>
                                     @endif
                                 </div>
                             </div>
 
-                            {{-- Nomor Hp Toko --}}
-                            <div class="row mb-3{{ $errors->has('nomor_hp') ? ' has-error' : '' }}">
-                                <label for="min_gol" class="col-sm-2 col-form-label">Nomor Hp Toko</label>
-                                <div class="col-sm-10">
-                                    <input name="nomor_hp" type="number" id="nomor_hp" class="form-control"
-                                        value="{{ old('nomor_hp') }}" required>
-                                    @if ($errors->has('nomor_hp'))
-                                        <span class="help-block"
-                                            style="color: red;">{{ $errors->first('nomor_hp') }}</span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="row mb-3">
                                 <button type="submit" class="btn btn-primary">Save</button>
                                 <a href="/dashboard" type="button" class="btn btn-primary" style="margin-top: 12px;">
                                     Home
                                 </a>
-                                <a href="/tokobarang" type="button" class="btn btn-primary" style="margin-top: 12px;">
+                                <a href="/jenisbarang" type="button" class="btn btn-primary" style="margin-top: 12px;">
                                     Back
                                 </a>
                             </div>
@@ -189,7 +172,7 @@
                             //swal("Data siswa dengan id "+ siswa_id +" telah berhasil dihapus!", {
                             //icon: "success",
                             //});
-                            window.location = "/tokobarang/" + book_id + "/destroy";
+                            window.location = "/jenisbarang/" + book_id + "/destroy";
 
                         } else {
                             swal("Data is not deleted");

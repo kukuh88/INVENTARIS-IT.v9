@@ -123,9 +123,9 @@
                                                             </p>
                                                         </td>
                                                         <td>
-                                                            <div>
-                                                                <img src="../assets/img/team-2.jpg"
-                                                                    class="avatar avatar-sm me-3">
+                                                            <div class="visible-print text-center">
+                                                                {!! QrCode::size(80)->generate($b->kode_barang) !!}
+                                                                <p>Inv. Ir</p>
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
@@ -153,7 +153,8 @@
                                                             </p>
                                                         </td>
                                                         <td class="text-center">
-                                                            <p class="text-xs font-weight-bold mb-0">{{ $b->kt_barang }}</p>
+                                                            <p class="text-xs font-weight-bold mb-0">{{ $b->kt_barang }}
+                                                            </p>
                                                         </td>
                                                         <td class="text-center">
                                                             <p class="text-xs font-weight-bold mb-0">{{ $b->anydesk }}
@@ -223,19 +224,16 @@
                             <div class="col-6 mb-3{{ $errors->has('kategori_barang') ? ' has-error' : '' }}">
                                 <label class="col-form-label">Kategori Barang</label>
                                 <div>
-                                    <select name="kategori_barang" class="form-select" id="floatingSelect"
-                                        aria-label="Floating label select example">
-                                        <option value="01"{{ old('Laptop') == 'Laptop' ? 'selected' : '' }}>Laptop
-                                        </option>
-                                        <option value="02"{{ old('Komputer') == 'Komputer' ? 'selected' : '' }}>
-                                            Komputer
-                                        </option>
-                                        <option value="03"{{ old('Printer') == 'Printer' ? 'selected' : '' }}>
-                                            Printer</option>
-                                        <option value="04"{{ old('Ups') == 'Ups' ? 'selected' : '' }}>
-                                            Ups</option>
-                                        {{-- <option value="Magazine"{{ old('type') == 'Magazine' ? 'selected' : '' }}>
-                                            Magazine</option> --}}
+                                    <select name="kategori_barang" class="form-select" id="#"
+                                        aria-label="Floating label select example" onchange="enableBarang()">
+                                        @foreach ($jenisbarang as $jb)
+                                            <option value="{{ $jb->id }}"
+                                                data-exclude="{{ $jb->kategori_barang }}">
+                                                {{ $jb->nama_kategori }}
+                                            </option>
+                                            {{-- <option value="{{ $jb->id }}" data-exclude="1">
+                                                {{ $jb->nama_kategori }}</option> --}}
+                                        @endforeach
                                     </select>
                                     @if ($errors->has('kategori_barang'))
                                         <span class="help-block"
@@ -248,7 +246,7 @@
                             <div class="col-6 mb-3{{ $errors->has('status_barang') ? ' has-error' : '' }}">
                                 <label class="col-form-label">Status Barang</label>
                                 <div>
-                                    <select name="status_barang" class="form-select" id="floatingSelect"
+                                    <select name="status_barang" class="form-select" id="#"
                                         aria-label="Floating label select example">
                                         <option value="O"{{ old('O') == 'O' ? 'selected' : '' }}>OLD
                                         </option>
@@ -335,10 +333,10 @@
                             </div>
 
                             {{-- Anydesk --}}
-                            <div class="col-sm-6 mb-3{{ $errors->has('anydesk') ? ' has-error' : '' }}">
+                            <div class="col-sm-6 mb-3{{ $errors->has('anydesk') ? ' has-error' : '' }}" id="anydesk">
                                 <label for="inputText" class="col-form-label">Anydesk</label>
                                 <div>
-                                    <input name="anydesk" type="text" id="rupiah" class="form-control"
+                                    <input name="anydesk" type="text" class="form-control"
                                         value="{{ old('anydesk') }}">
                                     @if ($errors->has('anydesk'))
                                         <span class="help-block"
@@ -377,7 +375,7 @@
                             <div class="col-sm-6 mb-3{{ $errors->has('lokasi') ? ' has-error' : '' }}">
                                 <label class="col-form-label">Lokasi Barang</label>
                                 <div>
-                                    <select name="lokasi" class="form-select" id="floatingSelect"
+                                    <select name="lokasi" class="form-select" id="#"
                                         aria-label="Floating label select example">
                                         @foreach ($tokobarang as $b)
                                             <option value="{{ $b->id }}">{{ $b->alamat_toko }}</option>
@@ -449,6 +447,17 @@
                             swal("Data is not deleted");
                         }
                     });
+            });
+        });
+
+        $(function() {
+            $('#floatingSelect').hide();
+            $('#type').change(function() {
+                if ($('#type').val() == '') {
+                    $('#floatingSelect').show();
+                } else {
+                    $('#floatingSelect').hide();
+                }
             });
         });
     </script>
